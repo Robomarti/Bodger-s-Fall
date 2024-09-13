@@ -181,3 +181,5 @@ $RECYCLE.BIN/
 /[Aa]ssets/[Gg]raphics/*
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,windows,unity
+
+.idea/*
