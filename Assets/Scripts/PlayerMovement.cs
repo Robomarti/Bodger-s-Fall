@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // From https://github.com/Matthew-J-Spencer/Ultimate-2D-Controller
@@ -13,10 +11,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float upwardsFlyingSpeed;
     [SerializeField] private float floatingHeight;
     [SerializeField] private float maximumAcceleration;
-    
+
     [SerializeField] private float maximumDivingTime;
     [SerializeField] private byte maximumDivingTries;
-    
+
     [SerializeField] private float peakStopTime;
 
     private Rigidbody2D playerRigidbody;
@@ -29,6 +27,8 @@ public class PlayerMovement : MonoBehaviour {
     private byte divingCount;
 
     private float peakStopTimer;
+    
+    [SerializeField] private Vector2 bodgerStruggleHitDirection;
     
     private void Awake() {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -49,10 +49,15 @@ public class PlayerMovement : MonoBehaviour {
     
     private void FixedUpdate() {
         playerVelocity = playerRigidbody.velocity;
-        
+
         MovePlayer();
         Glide();
 
+        if (bodgerStruggleHitDirection.magnitude > 0f) {
+            bodgerStruggleHitDirection *= 1 - Time.fixedDeltaTime;
+            playerVelocity += bodgerStruggleHitDirection;
+        }
+        
         if (transform.position.y >= floatingHeight) {
             playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
             divingTimer = maximumDivingTime;
@@ -79,5 +84,11 @@ public class PlayerMovement : MonoBehaviour {
         else {
             playerVelocity.y = upwardsFlyingSpeed;
         }
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (!(collision.gameObject.CompareTag("BodgerStruggle"))) return;
+        divingCount += 1;
+        bodgerStruggleHitDirection = new Vector2(0,5);
     }
 }

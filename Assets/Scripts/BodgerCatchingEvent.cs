@@ -6,11 +6,11 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 public class BodgerCatchingEvent : MonoBehaviour
 {
-    [SerializeField] private UnityEvent<Collider2D> onTriggerEnter2DEvent;
+    [SerializeField] private UnityEvent<Transform> onTriggerEnter2DEvent;
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
-            onTriggerEnter2DEvent.Invoke(collision);
+            onTriggerEnter2DEvent.Invoke(transform);
         }
     }
 }

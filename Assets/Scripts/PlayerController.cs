@@ -23,6 +23,6 @@ public class PlayerController : InputController {
     }
     
     public override bool RetrieveCatchInput() {
-        return Input.GetKeyUp(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space);
     }
 }
