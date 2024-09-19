@@ -28,8 +28,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private float peakStopTimer;
     
-    [SerializeField] private Vector2 bodgerStruggleHitDirection;
-    
     private void Awake() {
         playerRigidbody = GetComponent<Rigidbody2D>();
         divingTimer = maximumDivingTime;
@@ -52,11 +50,6 @@ public class PlayerMovement : MonoBehaviour {
 
         MovePlayer();
         Glide();
-
-        if (bodgerStruggleHitDirection.magnitude > 0f) {
-            bodgerStruggleHitDirection *= 1 - Time.fixedDeltaTime;
-            playerVelocity += bodgerStruggleHitDirection;
-        }
         
         if (transform.position.y >= floatingHeight) {
             playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
@@ -86,9 +79,8 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (!(collision.gameObject.CompareTag("BodgerStruggle"))) return;
+    public void KnockPlayerBack() {
         divingCount += 1;
-        bodgerStruggleHitDirection = new Vector2(0,5);
+        Debug.Log("not knocked back because not implemented");
     }
 }
