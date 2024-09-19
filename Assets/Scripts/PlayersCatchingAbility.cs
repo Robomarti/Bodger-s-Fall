@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(InputController))]
 public class PlayersCatchingAbility : MonoBehaviour {
@@ -6,6 +7,9 @@ public class PlayersCatchingAbility : MonoBehaviour {
     [SerializeField] private float maximumTimeToCatch;
     [SerializeField] private CatchingTimer catchingTimer;
     [SerializeField] private float maximumTimeBeforeGameOver;
+    
+    [SerializeField] private UnityEvent playVictoryCutsceneEvent;
+    [SerializeField] private UnityEvent playLoseCutsceneEvent;
 
     private bool triesToCatch;
     private float timeToCatch;
@@ -41,10 +45,10 @@ public class PlayersCatchingAbility : MonoBehaviour {
     }
 
     private void PlayerLost() {
-        Debug.Log("Player lost");
+        playLoseCutsceneEvent.Invoke();
     }
 
     private void PlayerWon() {
-        Debug.Log("Player won");
+        playVictoryCutsceneEvent.Invoke();
     }
 }

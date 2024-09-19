@@ -1009,6 +1009,7 @@ GameObject:
   m_Component:
   - component: {fileID: 598746503}
   - component: {fileID: 598746502}
+  - component: {fileID: 598746504}
   m_Layer: 0
   m_Name: CutsceneManager
   m_TagString: Untagged
@@ -1056,6 +1057,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &598746504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598746501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a7feadb8e9ba24c9e0b14c671c3e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cutsceneDirector: {fileID: 598746502}
+  victoryCutscene: {fileID: 11400000, guid: 041d555134ae1c640a3befbd3c342714, type: 2}
+  loseCutscene: {fileID: 11400000, guid: 17c106a6c4b2bdf469e54a5106cf001f, type: 2}
 --- !u!1 &799665875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1253,7 +1269,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1090535525
 Transform:
   m_ObjectHideFlags: 0
@@ -2291,6 +2307,36 @@ MonoBehaviour:
   maximumTimeToCatch: 0.5
   catchingTimer: {fileID: 411077374}
   maximumTimeBeforeGameOver: 30
+  playVictoryCutsceneEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 598746504}
+        m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
+        m_MethodName: PlayWinCutscene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  playLoseCutsceneEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 598746504}
+        m_TargetAssemblyTypeName: CutsceneManager, Assembly-CSharp
+        m_MethodName: PlayLoseCutscene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &1909535342
 Animator:
   serializedVersion: 5
