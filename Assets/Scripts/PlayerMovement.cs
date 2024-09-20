@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // From https://github.com/Matthew-J-Spencer/Ultimate-2D-Controller
@@ -13,10 +11,10 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float upwardsFlyingSpeed;
     [SerializeField] private float floatingHeight;
     [SerializeField] private float maximumAcceleration;
-    
+
     [SerializeField] private float maximumDivingTime;
     [SerializeField] private byte maximumDivingTries;
-    
+
     [SerializeField] private float peakStopTime;
 
     private Rigidbody2D playerRigidbody;
@@ -49,10 +47,10 @@ public class PlayerMovement : MonoBehaviour {
     
     private void FixedUpdate() {
         playerVelocity = playerRigidbody.velocity;
-        
+
         MovePlayer();
         Glide();
-
+        
         if (transform.position.y >= floatingHeight) {
             playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
             divingTimer = maximumDivingTime;
@@ -79,5 +77,9 @@ public class PlayerMovement : MonoBehaviour {
         else {
             playerVelocity.y = upwardsFlyingSpeed;
         }
+    }
+    
+    public void StopPlayerGlide() {
+        divingTimer = -1;
     }
 }
