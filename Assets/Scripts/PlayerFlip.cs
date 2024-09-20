@@ -7,12 +7,17 @@ public class PlayerFlip : MonoBehaviour {
     
     private float horizontalMovement;
     private bool isFacingRight;
+
+    private void Start() {
+        isFacingRight = true;
+    }
     
     private void Update() {
         horizontalMovement = playerController.RetrieveMovementInput();
 
-        if (!((horizontalMovement < 0 && isFacingRight) || (horizontalMovement > 0 && !isFacingRight))) return;
-        isFacingRight = !isFacingRight;
-        transform.Rotate(0,180,0);
+        if ((horizontalMovement < 0 && isFacingRight) || (horizontalMovement > 0 && !isFacingRight)) {
+            isFacingRight = !isFacingRight;
+            transform.Rotate(0,180,0);
+        }
     }
 }
