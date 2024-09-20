@@ -79,8 +79,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
     
-    public void KnockPlayerBack() {
-        divingCount += 1;
-        Debug.Log("not knocked back because not implemented");
+    public void StopPlayerGlide() {
+        divingTimer = -1;
     }
 }

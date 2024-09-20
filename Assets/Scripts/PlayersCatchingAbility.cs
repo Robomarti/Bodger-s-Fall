@@ -39,7 +39,6 @@ public class PlayersCatchingAbility : MonoBehaviour {
     public void InBodgersRadius(Transform bodgerTransform) {
         if (!triesToCatch) return;
         triesToCatch = false;
-        Debug.Log("caught bodger");
         catchingTimer.StopTimer();
         PlayerWon();
     }
