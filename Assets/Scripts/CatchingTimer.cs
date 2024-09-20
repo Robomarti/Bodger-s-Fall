@@ -7,7 +7,7 @@ public class CatchingTimer : MonoBehaviour {
 
     private bool isRunning;
     private float timeToShow;
-    private TimeSpan timeSpan;
+    public TimeSpan TimerTimeSpan { get; private set; }
 
     private float maximumTimeBeforeGameOver;
     private Action timerCallback;
@@ -21,8 +21,8 @@ public class CatchingTimer : MonoBehaviour {
         if (!isRunning) return;
         
         timeToShow += Time.deltaTime;
-        timeSpan = TimeSpan.FromSeconds(timeToShow);
-        timerText.text = timeSpan.ToString(@"ss\:ff");
+        TimerTimeSpan = TimeSpan.FromSeconds(timeToShow);
+        timerText.text = TimerTimeSpan.ToString(@"ss\:ff");
 
         if (timeToShow >= maximumTimeBeforeGameOver) {
             timerCallback();

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +11,9 @@ public class PlayersCatchingAbility : MonoBehaviour {
     
     [SerializeField] private UnityEvent playVictoryCutsceneEvent;
     [SerializeField] private UnityEvent playLoseCutsceneEvent;
+    
+    [SerializeField] private GameMenu gameMenu;
+    [SerializeField] private TMP_Text endTimerText;
 
     private bool triesToCatch;
     private float timeToCatch;
@@ -44,10 +48,14 @@ public class PlayersCatchingAbility : MonoBehaviour {
     }
 
     private void PlayerLost() {
+        endTimerText.text = "Bodger fell to his death";
+        gameMenu.SetGameOver();
         playLoseCutsceneEvent.Invoke();
     }
 
     private void PlayerWon() {
+        endTimerText.text = "Your time: \n" + catchingTimer.TimerTimeSpan.ToString(@"ss\:ff");
+        gameMenu.SetGameOver();
         playVictoryCutsceneEvent.Invoke();
     }
 }

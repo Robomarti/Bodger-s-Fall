@@ -9,12 +9,19 @@ public class GameMenu : Menus {
     [SerializeField] private CatchingTimer catchingTimer;
     
     private bool isPaused;
+    private bool isGameOver;
+
+    public void SetGameOver() {
+        isGameOver = true;
+    }
 
     private void Start() {
+        isGameOver = false;
         isPaused = pauseMenu.activeSelf;
     }
 
     private void Update() {
+        if (isGameOver) return;
         if (playerController.RetrievePauseKeyDown()) {
             ToggleGamePause();
         }
