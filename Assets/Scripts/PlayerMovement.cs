@@ -7,79 +7,60 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputController playerController;
     [SerializeField] private float sidewaysMovementSpeed;
     [SerializeField] private float downwardsDivingSpeed;
-    [SerializeField] private float sidewaysDivingSpeed;
-    [SerializeField] private float upwardsFlyingSpeed;
-    [SerializeField] private float floatingHeight;
     [SerializeField] private float maximumAcceleration;
-
-    [SerializeField] private float maximumDivingTime;
-    [SerializeField] private byte maximumDivingTries;
-
-    [SerializeField] private float peakStopTime;
+    [SerializeField] private float maximumFlyingHeight;
+    [SerializeField] private float minimumFlyingHeight;
+    [SerializeField] private float knockbackForce;
+    [SerializeField] private float knockbackDeceleration;
 
     private Rigidbody2D playerRigidbody;
     private Vector2 movementDirection;
     private float desiredPlayerVelocityX;
     private Vector2 playerVelocity;
-    private bool isDiving;
-
-    private float divingTimer;
-    private byte divingCount;
-
-    private float peakStopTimer;
+    
+    private float currentKnockback;
     
     private void Awake() {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        divingTimer = maximumDivingTime;
-        divingCount = 0;
-        peakStopTimer = peakStopTime;
     }
 
     private void Update() {
         movementDirection.x = playerController.RetrieveMovementInput();
         desiredPlayerVelocityX = movementDirection.x * sidewaysMovementSpeed;
-        isDiving = playerController.RetrieveHoldGlideInput();
-
-        if (playerController.RetrieveLetGoGlideInput()) {
-            divingCount += 1;
-        }
     }
     
     private void FixedUpdate() {
         playerVelocity = playerRigidbody.velocity;
 
         MovePlayer();
-        Glide();
+        MoveDownwards();
         
-        if (transform.position.y >= floatingHeight) {
+        if (transform.position.y >= maximumFlyingHeight) {
             playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
-            divingTimer = maximumDivingTime;
-            divingCount = 0;
-            peakStopTimer = peakStopTime;
+        }
+        if (transform.position.y <= minimumFlyingHeight) {
+            playerVelocity.y = Mathf.Max(playerVelocity.y, 0f);
         }
 
         playerRigidbody.velocity = playerVelocity;
     }
 
     private void MovePlayer() {
-        playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, desiredPlayerVelocityX, maximumAcceleration * Time.deltaTime);
+        playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, desiredPlayerVelocityX, maximumAcceleration * Time.fixedDeltaTime);
     }
 
-    private void Glide() {
-        if (isDiving && divingTimer >= 0 && divingCount < maximumDivingTries) {
-            divingTimer -= Time.deltaTime;
-            playerVelocity.y = Mathf.Lerp(-downwardsDivingSpeed, -sidewaysDivingSpeed, Mathf.Abs(playerVelocity.x));
-        }
-        else if (peakStopTimer >= 0) {
-            playerVelocity.y = 0;
-            peakStopTimer -= Time.deltaTime;
+    private void MoveDownwards() {
+        if (currentKnockback <= 0) {
+            currentKnockback = 0;
         }
         else {
-            playerVelocity.y = upwardsFlyingSpeed;
+            currentKnockback -= Time.fixedDeltaTime * knockbackDeceleration;
         }
+
+        playerVelocity.y = -downwardsDivingSpeed + currentKnockback;
     }
-    
-    public void StopPlayerGlide() {
-        divingTimer = -1;
+
+    public void ObstacleHitPlayerEvent() {
+        currentKnockback = knockbackForce; 
     }
 }

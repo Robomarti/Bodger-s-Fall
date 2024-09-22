@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bodger
   - BodgerStruggle
+  - Obstacle
   layers:
   - Default
   - TransparentFX
