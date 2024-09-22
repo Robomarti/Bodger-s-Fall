@@ -2,9 +2,9 @@ using UnityEngine;
 
 // made with https://www.youtube.com/watch?v=vClEQ1GqMPw
 public class ObstacleSpawner : MonoBehaviour {
-    [SerializeField] private GameObject[] obstaclePrefabs;
     [SerializeField] private float obstacleSpawnInterval;
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private GameObject[] obstaclePrefabs;
+    [SerializeField] private Transform[] spawnPoints;
 
     private float timeUntilObstacleSpawn;
     private GameObject obstacleToSpawn;
@@ -30,6 +30,6 @@ public class ObstacleSpawner : MonoBehaviour {
 
     private void SpawnObstacle() {
         obstacleToSpawn = obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)];
-        Instantiate(obstacleToSpawn, spawnPoint.position, Quaternion.identity);
+        Instantiate(obstacleToSpawn, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
     }
 }

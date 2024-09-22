@@ -40,7 +40,7 @@ public class PlayersCatchingAbility : MonoBehaviour {
         }
     }
 
-    public void InBodgersRadius(Transform bodgerTransform) {
+    public void InBodgersRadius() {
         if (!triesToCatch) return;
         triesToCatch = false;
         catchingTimer.StopTimer();
