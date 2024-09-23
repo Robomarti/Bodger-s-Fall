@@ -1,11 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 // made with https://www.youtube.com/watch?v=vClEQ1GqMPw
 public class ObstacleSpawner : MonoBehaviour {
     [SerializeField] private float obstacleSpawnInterval;
-    [SerializeField] private Transform[] spawnPoints;
-
     public Spawnables[] obstaclePrefabs;
+    [SerializeField] private SpawnLocations[] spawnLocations;
 
     private float timeUntilObstacleSpawn;
     private GameObject obstacleToSpawn;
@@ -14,9 +14,11 @@ public class ObstacleSpawner : MonoBehaviour {
 
     private int spawnChances;
     private int spawnChanceCounter;
+    
+    private SpawnLocations nextSpawnLocation;
 
     private void Start() {
-        timeUntilObstacleSpawn = 1;
+        timeUntilObstacleSpawn = 0;
         CountSpawnChances();
     }
     
@@ -28,14 +30,18 @@ public class ObstacleSpawner : MonoBehaviour {
         timeUntilObstacleSpawn -= Time.deltaTime;
 
         if (timeUntilObstacleSpawn <= 0) {
-            SpawnObstacle();
+            StartCoroutine(SpawnObstacle());;
             timeUntilObstacleSpawn = obstacleSpawnInterval;
         }
     }
 
-    private void SpawnObstacle() {
+    private IEnumerator SpawnObstacle() {
         SetObstacleToSpawn();
-        Instantiate(obstacleToSpawn, spawnPoints[Random.Range(0, spawnPoints.Length)].position, Quaternion.identity);
+        nextSpawnLocation = spawnLocations[Random.Range(0, spawnLocations.Length)];
+        nextSpawnLocation.spawnLocationWarningSign.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        nextSpawnLocation.spawnLocationWarningSign.SetActive(false);
+        Instantiate(obstacleToSpawn, nextSpawnLocation.spawnPoint.position, Quaternion.identity);
     }
 
     private void SetObstacleToSpawn() {
@@ -60,5 +66,11 @@ public class ObstacleSpawner : MonoBehaviour {
     public struct Spawnables {
         public GameObject spawnablePrefab;
         public int spawnChance;
+    }
+    
+    [System.Serializable]
+    public struct SpawnLocations {
+        public Transform spawnPoint;
+        public GameObject spawnLocationWarningSign;
     }
 }
