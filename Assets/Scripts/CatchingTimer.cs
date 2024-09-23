@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CatchingTimer : MonoBehaviour {
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private Animator timerBackgroundAnimator;
 
     private bool isRunning;
     private float timeToShow;
@@ -27,6 +28,9 @@ public class CatchingTimer : MonoBehaviour {
         if (timeToShow >= maximumTimeBeforeGameOver) {
             timerCallback();
             StopTimer();
+        }
+        else if (timeToShow >= maximumTimeBeforeGameOver - 5) {
+            timerBackgroundAnimator.enabled = true;
         }
     }
 
