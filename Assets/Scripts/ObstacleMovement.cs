@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleMovement : MonoBehaviour {
-    [SerializeField] private Rigidbody2D obstacleRigidbody;
-    [SerializeField] private float obstacleSpeed;
+    [SerializeField] protected Rigidbody2D obstacleRigidbody;
+    [SerializeField] protected float obstacleSpeed;
     
-    private void Start() {
+    protected virtual void Start() {
         obstacleRigidbody.velocity = Vector2.up * obstacleSpeed;
     }
 }

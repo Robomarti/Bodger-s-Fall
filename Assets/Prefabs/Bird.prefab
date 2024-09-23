@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8165492360251607409}
   - component: {fileID: 8166829742864471157}
   - component: {fileID: 5172730172590017867}
-  - component: {fileID: 3590168550281509230}
+  - component: {fileID: 3041443841895953345}
   m_Layer: 0
   m_Name: Bird
   m_TagString: Obstacle
@@ -61,7 +61,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!70 &5172730172590017867
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.27}
   m_Size: {x: 1, y: 0.4}
   m_Direction: 1
---- !u!114 &3590168550281509230
+--- !u!114 &3041443841895953345
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,11 +106,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4794977015877420802}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6b85d867777d04e947e0816f2ba853, type: 3}
+  m_Script: {fileID: 11500000, guid: ccec81a27616d6e4a918d502588d20e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleRigidbody: {fileID: 8166829742864471157}
   obstacleSpeed: 1
+  possibleTimesBeforeSidewaysMovement:
+  - 3
+  - 6
+  - 9
 --- !u!1 &7428619902099208390
 GameObject:
   m_ObjectHideFlags: 0
