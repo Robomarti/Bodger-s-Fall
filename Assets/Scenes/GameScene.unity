@@ -1529,15 +1529,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleSpawnInterval: 2
-  obstaclePrefabs:
-  - {fileID: 3135604877322046668, guid: 4a8c5fbba252b2a4c971097b2803a1d2, type: 3}
-  - {fileID: 4794977015877420802, guid: 999e0155210ffd542abe23f93f0d07e9, type: 3}
-  - {fileID: 6841700077679119539, guid: 9ad57f0ac57860c47bf6d46cc7f1c4d9, type: 3}
-  - {fileID: 821303346801391521, guid: 1d370706d75a2bc4b8916cc563964860, type: 3}
   spawnPoints:
   - {fileID: 553136177}
   - {fileID: 1002672430}
   - {fileID: 581237148}
+  obstaclePrefabs:
+  - spawnablePrefab: {fileID: 4794977015877420802, guid: 999e0155210ffd542abe23f93f0d07e9, type: 3}
+    spawnChance: 20
+  - spawnablePrefab: {fileID: 3135604877322046668, guid: 4a8c5fbba252b2a4c971097b2803a1d2, type: 3}
+    spawnChance: 1
+  - spawnablePrefab: {fileID: 6841700077679119539, guid: 9ad57f0ac57860c47bf6d46cc7f1c4d9, type: 3}
+    spawnChance: 5
+  - spawnablePrefab: {fileID: 821303346801391521, guid: 1d370706d75a2bc4b8916cc563964860, type: 3}
+    spawnChance: 3
 --- !u!1 &739744833
 GameObject:
   m_ObjectHideFlags: 0
