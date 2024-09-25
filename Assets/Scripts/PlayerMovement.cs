@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float knockbackDeceleration;
     
     // Flying bounds
-    [SerializeField] private float PlayerHeightOffset;
+    [SerializeField] private float playerHeightOffset;
     [SerializeField] private float maximumFlyingHeight;
     [SerializeField] private float minimumFlyingHeight;
-    [SerializeField] private float PlayerWidthOffset;
     [SerializeField] private float maximumHorizontalPosition;
     [SerializeField] private float minimumHorizontalPosition;
+    
+    [SerializeField] private float screenEdgeX;
 
     private Rigidbody2D playerRigidbody;
     private Vector2 movementDirection;
@@ -62,35 +63,35 @@ public class PlayerMovement : MonoBehaviour {
 
     private void CheckBounds() {
         // Upper bounds
-        if (transform.position.y >= maximumFlyingHeight - PlayerHeightOffset + 1) {
+        if (transform.position.y >= maximumFlyingHeight - playerHeightOffset + 1) {
             playerVelocity.y = -1f;
         }
-        else if (transform.position.y > maximumFlyingHeight - PlayerHeightOffset) {
+        else if (transform.position.y > maximumFlyingHeight - playerHeightOffset) {
             playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
         }
         
         // Lower bounds
-        if (transform.position.y <= minimumFlyingHeight + PlayerHeightOffset - 1) {
+        if (transform.position.y <= minimumFlyingHeight + playerHeightOffset - 1) {
             playerVelocity.y = 1f;
         }
-        else if (transform.position.y < minimumFlyingHeight + PlayerHeightOffset) {
+        else if (transform.position.y < minimumFlyingHeight + playerHeightOffset) {
             playerVelocity.y = Mathf.Max(playerVelocity.y, 0f);
         }
         
         // Right bounds
-        if (transform.position.x >= maximumHorizontalPosition - PlayerWidthOffset + 1) {
+        if (transform.position.x >= maximumHorizontalPosition + 1) {
             playerVelocity.x = -1f;
         }
-        else if (transform.position.x > maximumHorizontalPosition - PlayerWidthOffset) {
-            playerVelocity.x = Mathf.Min(playerVelocity.x, 0f);
+        else if (transform.position.x > maximumHorizontalPosition) {
+            transform.position = new Vector2(-screenEdgeX, transform.position.y);
         }
         
         // Left bounds
-        if (transform.position.x <= minimumHorizontalPosition + PlayerWidthOffset - 1) {
+        if (transform.position.x <= minimumHorizontalPosition - 1) {
             playerVelocity.x = 1f;
         }
-        else if (transform.position.x < minimumHorizontalPosition + PlayerWidthOffset) {
-            playerVelocity.x = Mathf.Max(playerVelocity.x, 0f);
+        else if (transform.position.x < minimumHorizontalPosition) {
+            transform.position = new Vector2(screenEdgeX, transform.position.y);
         }
     }
 
