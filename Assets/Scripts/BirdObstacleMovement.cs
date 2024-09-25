@@ -24,10 +24,13 @@ public class BirdObstacleMovement : ObstacleMovement {
         if (timer >= timeBeforeLeftMovement) {
             if (movesLeft) {
                 obstacleRigidbody.velocity = Vector2.left * obstacleSpeed;
+                transform.Rotate(0,180,0);
             }
             else {
                 obstacleRigidbody.velocity = Vector2.right * obstacleSpeed;
             }
+            
+            this.enabled = false;
         }
     }
 }
