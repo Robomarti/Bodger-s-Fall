@@ -29,4 +29,12 @@ public class AudioManager : MonoBehaviour {
     public void PlaySoundEffects(AudioClip clip) {
         soundEffectsSource.PlayOneShot(clip);
     }
+
+    public void ChangeMusicVolume(System.Single volumeLevel) {
+        musicSource.volume = volumeLevel;
+    }
+    
+    public void ChangeSFXVolume(System.Single volumeLevel) {
+        soundEffectsSource.volume = volumeLevel;
+    }
 }
