@@ -4754,7 +4754,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1909535336}
   - component: {fileID: 1909535335}
-  - component: {fileID: 1909535338}
   - component: {fileID: 1909535341}
   - component: {fileID: 1909535343}
   - component: {fileID: 1909535334}
@@ -4817,7 +4816,7 @@ MonoBehaviour:
   minimumFlyingHeight: -4
   maximumHorizontalPosition: 9
   minimumHorizontalPosition: -9
-  screenEdgeX: 0
+  screenEdgeX: 9
 --- !u!4 &1909535336
 Transform:
   m_ObjectHideFlags: 0
@@ -4835,19 +4834,6 @@ Transform:
   - {fileID: 1660757751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1909535338
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1909535333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4c5553e2403fcfc49a1cf117df41b714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerController: {fileID: 11400000, guid: 5021d3edd4fba444ea74cd7caccfe8ad, type: 2}
 --- !u!70 &1909535340
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -4902,7 +4888,7 @@ MonoBehaviour:
   playVictoryCutsceneEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1909535338}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
         m_MethodName: set_enabled
         m_Mode: 6
