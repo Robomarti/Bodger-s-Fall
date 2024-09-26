@@ -32,11 +32,13 @@ public class GameMenu : Menus {
             pauseMenu.SetActive(false);
             isPaused = false;
             catchingTimer.PauseTimer(false);
+            Time.timeScale = 1;
         }
         else {
             pauseMenu.SetActive(true);
             isPaused = true;
             catchingTimer.PauseTimer(true);
+            Time.timeScale = 0;
         }
     }
 }

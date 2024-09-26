@@ -7,79 +7,95 @@ public class PlayerMovement : MonoBehaviour {
     [SerializeField] private InputController playerController;
     [SerializeField] private float sidewaysMovementSpeed;
     [SerializeField] private float downwardsDivingSpeed;
-    [SerializeField] private float sidewaysDivingSpeed;
-    [SerializeField] private float upwardsFlyingSpeed;
-    [SerializeField] private float floatingHeight;
     [SerializeField] private float maximumAcceleration;
-
-    [SerializeField] private float maximumDivingTime;
-    [SerializeField] private byte maximumDivingTries;
-
-    [SerializeField] private float peakStopTime;
+    [SerializeField] private float knockbackForce;
+    [SerializeField] private float knockbackDeceleration;
+    
+    // Flying bounds
+    [SerializeField] private float playerHeightOffset;
+    [SerializeField] private float maximumFlyingHeight;
+    [SerializeField] private float minimumFlyingHeight;
+    [SerializeField] private float maximumHorizontalPosition;
+    [SerializeField] private float minimumHorizontalPosition;
+    
+    [SerializeField] private float screenEdgeX;
 
     private Rigidbody2D playerRigidbody;
     private Vector2 movementDirection;
     private float desiredPlayerVelocityX;
     private Vector2 playerVelocity;
-    private bool isDiving;
-
-    private float divingTimer;
-    private byte divingCount;
-
-    private float peakStopTimer;
+    
+    private float currentKnockback;
     
     private void Awake() {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        divingTimer = maximumDivingTime;
-        divingCount = 0;
-        peakStopTimer = peakStopTime;
     }
 
     private void Update() {
         movementDirection.x = playerController.RetrieveMovementInput();
         desiredPlayerVelocityX = movementDirection.x * sidewaysMovementSpeed;
-        isDiving = playerController.RetrieveHoldGlideInput();
-
-        if (playerController.RetrieveLetGoGlideInput()) {
-            divingCount += 1;
-        }
     }
     
     private void FixedUpdate() {
         playerVelocity = playerRigidbody.velocity;
 
         MovePlayer();
-        Glide();
-        
-        if (transform.position.y >= floatingHeight) {
-            playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
-            divingTimer = maximumDivingTime;
-            divingCount = 0;
-            peakStopTimer = peakStopTime;
-        }
+        MoveDownwards();
+        CheckBounds();
 
         playerRigidbody.velocity = playerVelocity;
     }
 
     private void MovePlayer() {
-        playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, desiredPlayerVelocityX, maximumAcceleration * Time.deltaTime);
+        playerVelocity.x = Mathf.MoveTowards(playerVelocity.x, desiredPlayerVelocityX, maximumAcceleration * Time.fixedDeltaTime);
     }
 
-    private void Glide() {
-        if (isDiving && divingTimer >= 0 && divingCount < maximumDivingTries) {
-            divingTimer -= Time.deltaTime;
-            playerVelocity.y = Mathf.Lerp(-downwardsDivingSpeed, -sidewaysDivingSpeed, Mathf.Abs(playerVelocity.x));
-        }
-        else if (peakStopTimer >= 0) {
-            playerVelocity.y = 0;
-            peakStopTimer -= Time.deltaTime;
+    private void MoveDownwards() {
+        if (currentKnockback <= 0) {
+            currentKnockback = 0;
         }
         else {
-            playerVelocity.y = upwardsFlyingSpeed;
+            currentKnockback -= Time.fixedDeltaTime * knockbackDeceleration;
+        }
+
+        playerVelocity.y = -downwardsDivingSpeed + currentKnockback;
+    }
+
+    private void CheckBounds() {
+        // Upper bounds
+        if (transform.position.y >= maximumFlyingHeight - playerHeightOffset + 1) {
+            playerVelocity.y = -1f;
+        }
+        else if (transform.position.y > maximumFlyingHeight - playerHeightOffset) {
+            playerVelocity.y = Mathf.Min(playerVelocity.y, 0f);
+        }
+        
+        // Lower bounds
+        if (transform.position.y <= minimumFlyingHeight + playerHeightOffset - 1) {
+            playerVelocity.y = 1f;
+        }
+        else if (transform.position.y < minimumFlyingHeight + playerHeightOffset) {
+            playerVelocity.y = Mathf.Max(playerVelocity.y, 0f);
+        }
+        
+        // Right bounds
+        if (transform.position.x >= maximumHorizontalPosition + 1) {
+            playerVelocity.x = -1f;
+        }
+        else if (transform.position.x > maximumHorizontalPosition) {
+            transform.position = new Vector2(-screenEdgeX, transform.position.y);
+        }
+        
+        // Left bounds
+        if (transform.position.x <= minimumHorizontalPosition - 1) {
+            playerVelocity.x = 1f;
+        }
+        else if (transform.position.x < minimumHorizontalPosition) {
+            transform.position = new Vector2(screenEdgeX, transform.position.y);
         }
     }
-    
-    public void StopPlayerGlide() {
-        divingTimer = -1;
+
+    public void ObstacleHitPlayerEvent() {
+        currentKnockback = knockbackForce; 
     }
 }

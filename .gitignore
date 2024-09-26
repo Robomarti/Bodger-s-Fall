@@ -178,8 +178,7 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-/[Aa]ssets/[Gg]raphics/*
-
 # End of https://www.toptal.com/developers/gitignore/api/rider,windows,unity
 
 .idea/*
+/[Aa]ssets/[Aa]udio/[Ss]oundEffects/*

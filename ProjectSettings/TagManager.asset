@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Bodger
   - BodgerStruggle
+  - Obstacle
+  - Cloud
   layers:
   - Default
   - TransparentFX
