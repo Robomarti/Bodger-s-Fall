@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1554224461093379807}
+  - component: {fileID: 7236096410966705388}
+  - component: {fileID: 4530946316797706858}
   - component: {fileID: 145678546119418314}
   - component: {fileID: 2296050205866534170}
-  - component: {fileID: 7236096410966705388}
   - component: {fileID: 4627856749534570377}
   m_Layer: 0
   m_Name: HotAirBalloon
@@ -36,6 +37,33 @@ Transform:
   - {fileID: 8468787028990514338}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7236096410966705388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135604877322046668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a6b85d867777d04e947e0816f2ba853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstacleRigidbody: {fileID: 145678546119418314}
+  obstacleSpeed: 1
+--- !u!114 &4530946316797706858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3135604877322046668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5adc55be5f4b11d429ca2e5ca59adf91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fromTheAir: {fileID: 8300000, guid: 4a9c82f58ba2c9448bf9d1880c625456, type: 3}
 --- !u!50 &145678546119418314
 Rigidbody2D:
   serializedVersion: 4
@@ -98,20 +126,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -1.36}
   m_Size: {x: 2, y: 2.47}
   m_Direction: 0
---- !u!114 &7236096410966705388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3135604877322046668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a6b85d867777d04e947e0816f2ba853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obstacleRigidbody: {fileID: 145678546119418314}
-  obstacleSpeed: 1
 --- !u!61 &4627856749534570377
 BoxCollider2D:
   m_ObjectHideFlags: 0
