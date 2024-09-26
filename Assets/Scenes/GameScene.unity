@@ -1154,7 +1154,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1820, y: 980}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:
@@ -1998,9 +1998,9 @@ MonoBehaviour:
   obstacleSpawnInterval: 2
   obstaclePrefabs:
   - spawnablePrefab: {fileID: 4794977015877420802, guid: 999e0155210ffd542abe23f93f0d07e9, type: 3}
-    spawnChance: 85
+    spawnChance: 90
   - spawnablePrefab: {fileID: 3135604877322046668, guid: 4a8c5fbba252b2a4c971097b2803a1d2, type: 3}
-    spawnChance: 15
+    spawnChance: 10
   spawnLocations:
   - spawnPoint: {fileID: 553136177}
     spawnLocationWarningSign: {fileID: 1503579357}

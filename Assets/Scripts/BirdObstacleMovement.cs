@@ -21,6 +21,10 @@ public class BirdObstacleMovement : ObstacleMovement {
         else {
             movesLeft = transform.position.x > 0;
         }
+
+        if (movesLeft) {
+            transform.Rotate(0,180,0);
+        }
     }
     
     private void Update() {
@@ -29,7 +33,6 @@ public class BirdObstacleMovement : ObstacleMovement {
         if (timer >= timeBeforeLeftMovement) {
             if (movesLeft) {
                 obstacleRigidbody.velocity = Vector2.left * obstacleSpeed;
-                transform.Rotate(0,180,0);
             }
             else {
                 obstacleRigidbody.velocity = Vector2.right * obstacleSpeed;
