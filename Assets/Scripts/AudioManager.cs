@@ -37,4 +37,12 @@ public class AudioManager : MonoBehaviour {
     public void ChangeSFXVolume(System.Single volumeLevel) {
         soundEffectsSource.volume = volumeLevel;
     }
+
+    public float GetMusicVolume() {
+        return musicSource.volume;
+    }
+    
+    public float GetSFXVolume() {
+        return soundEffectsSource.volume;
+    }
 }
