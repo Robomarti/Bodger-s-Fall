@@ -242,11 +242,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleRigidbody: {fileID: 8166829742864471157}
-  obstacleSpeed: 1
+  obstacleSpeed: 2
   possibleTimesBeforeSidewaysMovement:
+  - 1
   - 2
-  - 4
-  - 6
+  - 3
 --- !u!95 &3984447261457512114
 Animator:
   serializedVersion: 5
