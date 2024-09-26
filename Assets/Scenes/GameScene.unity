@@ -5053,7 +5053,9 @@ MonoBehaviour:
   - spawnablePrefab: {fileID: 821303346801391521, guid: 1d370706d75a2bc4b8916cc563964860, type: 3}
     spawnChance: 40
   - spawnablePrefab: {fileID: 6841700077679119539, guid: 9ad57f0ac57860c47bf6d46cc7f1c4d9, type: 3}
-    spawnChance: 60
+    spawnChance: 30
+  - spawnablePrefab: {fileID: 6841700077679119539, guid: 8fb13a0e6b7b5a64e85f63847614c687, type: 3}
+    spawnChance: 30
   spawnLocations:
   - {fileID: 1503579358}
   - {fileID: 1152823032}
