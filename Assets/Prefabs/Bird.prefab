@@ -244,9 +244,10 @@ MonoBehaviour:
   obstacleRigidbody: {fileID: 8166829742864471157}
   obstacleSpeed: 2
   possibleTimesBeforeSidewaysMovement:
-  - 1
+  - 1.5
   - 2
   - 3
+  - 4
 --- !u!95 &3984447261457512114
 Animator:
   serializedVersion: 5

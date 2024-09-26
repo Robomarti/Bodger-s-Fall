@@ -18,8 +18,17 @@ public class ObstacleSpawner : MonoBehaviour {
     private SpawnLocations nextSpawnLocation;
 
     private void Start() {
-        timeUntilObstacleSpawn = 0;
+        timeUntilObstacleSpawn = obstacleSpawnInterval;
         CountSpawnChances();
+
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[0].spawnPoint.position, Quaternion.identity);
+        
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[1].spawnPoint.position, Quaternion.identity);
+        
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[2].spawnPoint.position, Quaternion.identity);
     }
     
     private void Update() {
