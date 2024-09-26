@@ -14,8 +14,13 @@ public class BirdObstacleMovement : ObstacleMovement {
         obstacleRigidbody.velocity = Vector2.up * obstacleSpeed;
         timeBeforeLeftMovement =
             possibleTimesBeforeSidewaysMovement[Random.Range(0, possibleTimesBeforeSidewaysMovement.Length)];
-        
-        movesLeft = Random.Range(0, 2) == 0;
+
+        if (transform.position.x == 0) {
+            movesLeft = Random.Range(0, 2) == 0;
+        }
+        else {
+            movesLeft = transform.position.x > 0;
+        }
     }
     
     private void Update() {
