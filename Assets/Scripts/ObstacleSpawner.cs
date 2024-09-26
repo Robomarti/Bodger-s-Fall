@@ -3,23 +3,29 @@ using UnityEngine;
 
 // made with https://www.youtube.com/watch?v=vClEQ1GqMPw
 public class ObstacleSpawner : MonoBehaviour {
-    [SerializeField] private float obstacleSpawnInterval;
+    [SerializeField] protected float obstacleSpawnInterval;
     public Spawnables[] obstaclePrefabs;
-    [SerializeField] private SpawnLocations[] spawnLocations;
+    [SerializeField] protected SpawnLocations[] spawnLocations;
 
     private float timeUntilObstacleSpawn;
-    private GameObject obstacleToSpawn;
+    protected GameObject obstacleToSpawn;
     private GameObject spawnedObstacle;
     private Rigidbody2D spawnedObstacleRigidBody;
 
     private int spawnChances;
     private int spawnChanceCounter;
     
-    private SpawnLocations nextSpawnLocation;
+    protected SpawnLocations nextSpawnLocation;
 
     private void Start() {
-        timeUntilObstacleSpawn = 0;
+        timeUntilObstacleSpawn = obstacleSpawnInterval;
         CountSpawnChances();
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[0].spawnPoint.position, Quaternion.identity);
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[1].spawnPoint.position, Quaternion.identity);
+        SetObstacleToSpawn();
+        Instantiate(obstacleToSpawn, spawnLocations[2].spawnPoint.position, Quaternion.identity);
     }
     
     private void Update() {
@@ -35,7 +41,7 @@ public class ObstacleSpawner : MonoBehaviour {
         }
     }
 
-    private IEnumerator SpawnObstacle() {
+    protected virtual IEnumerator SpawnObstacle() {
         SetObstacleToSpawn();
         nextSpawnLocation = spawnLocations[Random.Range(0, spawnLocations.Length)];
         nextSpawnLocation.spawnLocationWarningSign.SetActive(true);
@@ -44,7 +50,7 @@ public class ObstacleSpawner : MonoBehaviour {
         Instantiate(obstacleToSpawn, nextSpawnLocation.spawnPoint.position, Quaternion.identity);
     }
 
-    private void SetObstacleToSpawn() {
+    protected void SetObstacleToSpawn() {
         spawnChanceCounter = Random.Range(0, spawnChances);
 
         foreach (Spawnables spawnable in obstaclePrefabs) {
